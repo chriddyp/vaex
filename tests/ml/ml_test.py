@@ -538,7 +538,7 @@ def test_kbinsdiscretizer(tmpdir, strategy):
     trans = vaex.ml.KBinsDiscretizer(features=['x', 'y'], n_bins=3, strategy=strategy)
 
     if strategy == 'quantile':
-        with pytest.warns(UserWarning):
+        with pytest.warns(UserWarning, match='Bins whose width are too small'):
             df_train_trans = trans.fit_transform(df_train)
     else:
         df_train_trans = trans.fit_transform(df_train)
